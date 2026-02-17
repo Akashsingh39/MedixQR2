@@ -1,0 +1,142 @@
+/* NAVBAR */
+/* GLOBAL STYLES & BACKGROUND (Assuming a background image or color is applied to body/html) */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  /* Example: A nice gradient background for a health app */
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(0,0,0,0.7); /* Darker background for contrast */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+  margin: 0;
+  color: white;
+  font-size: 1.5em;
+}
+
+.navbar .nav-links a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+  color: #80deea; /* Light blue on hover */
+  text-decoration: underline;
+}
+
+/* MAIN CONTENT CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.container h1 {
+  text-align: center;
+  color: #00bcd4;
+}
+
+/* CONTENT SECTIONS */
+.section {
+  margin: 30px 0;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.section h2 {
+  color: #0097a7;
+  border-left: 5px solid #00bcd4;
+  padding-left: 10px;
+}
+
+/* TABLE STYLING */
+.section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.section th, .section td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.section th {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* BUTTON STYLING */
+.section button, .form-container button {
+  background-color: #00bcd4; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.section button:hover, .form-container button:hover {
+  background-color: #0097a7;
+}
+
+
+/* FORM CONTAINER FOR LOGIN/SIGNUP */
+.form-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background: white; /* Changed to white for better contrast and legibility */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    color: #00bcd4;
+}
+
+.form-container input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Important for padding not to increase total width */
+}
+
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+.form-container p a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.form-container p a:hover {
+    text-decoration: underline;
+}
