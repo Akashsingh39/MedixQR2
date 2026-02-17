@@ -1,8 +1,10 @@
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 
 const app = express();
 
@@ -10,22 +12,39 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 🔗 Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/medixqr_db", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.log("❌ MongoDB Error:", err));
+// Static files serve karega (index.html etc.)
+app.use(express.static(__dirname));
+
+
+// 🔗 Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("✅ MongoDB Atlas Connected"))
+.catch(err => console.log("❌ DB Error:", err));
 
 
 // 👤 User Schema
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  age: { type: Number, required: true },
-  phone: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  name: {
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number,
+    required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
 });
 
 const User = mongoose.model("User", userSchema);
@@ -42,7 +61,6 @@ app.post("/signup", async (req, res) => {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -55,7 +73,7 @@ app.post("/signup", async (req, res) => {
 
     await newUser.save();
 
-    res.status(201).json({ message: "✅ User Registered Successfully" });
+    res.json({ message: "✅ User Registered Successfully" });
 
   } catch (err) {
     res.status(500).json({ error: "Server Error" });
@@ -86,11 +104,19 @@ app.post("/login", async (req, res) => {
 });
 
 
-// 🚀 Start Server
-const PORT = 5000;
+// 🏠 Default Route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-app.listen(PORT, () => {
+
+
+// 🚀 Start Server
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
 
 
